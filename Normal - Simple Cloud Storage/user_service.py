@@ -19,3 +19,8 @@ class Userservice:
     def logout(self):
         x = self.database.logout()
         return x
+    
+    @rpc
+    def upload_files(self, x, y):
+        x = self.database.upload_files(x, y)
+        return "x"

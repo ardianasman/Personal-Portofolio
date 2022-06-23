@@ -1,12 +1,16 @@
+import base64
 from urllib import response
 from nameko.rpc import RpcProxy
 from nameko.web.handlers import http
-from requests import request
+import requests as requestx
+import requests
 import json
 
 from werkzeug import Response
 from session import SessionProvider
 
+import io
+from PIL import Image
 
 
 class Gateway:
@@ -68,3 +72,25 @@ class Gateway:
         self.session_provider.delete_session(cookie['SESS'])
         response.delete_cookie('SESS')
         return response
+
+    @http('POST', '/upload_files')
+    def upload_files(self, request):
+        cookie = request.cookies
+        if cookie:
+            data = format(request.get_data(as_text=True))
+            tmp = requestx.utils.unquote(data)
+            el = tmp.split('=')
+            tmpname = el[2]
+            elname = tmpname.split('Content-Type: ')
+            filename = elname[0]
+            eltype = elname[1].split('\n')
+            contenttype = eltype[0]
+            byte = base64.b64decode(data.encode('utf-8'))
+            # bytes = io.BytesIO(byte)
+            # img = Image.open(bytes).convert('L')
+            # pixel = img.getpixel((pos['x'], ['y']))
+            # pixel = int(pixel/255*65535)
+            yy = "XXX = " + str(filename) + str(contenttype)
+            return str(byte)
+        else:
+            return "Please login"

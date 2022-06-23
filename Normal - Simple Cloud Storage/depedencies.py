@@ -38,6 +38,9 @@ class DatabaseWrapper:
     def logout(self):
         self.connection.close()
 
+    def upload_files(self, x, y):
+        return "1"
+
 
 
 class Database(DependencyProvider):
@@ -51,7 +54,7 @@ class Database(DependencyProvider):
                 pool_size=5,
                 pool_reset_session=True,
                 host='localhost',
-                database='personalportofolio',
+                database='personalportofolio_cloudstorage',
                 user='root',
                 password=''
             )
