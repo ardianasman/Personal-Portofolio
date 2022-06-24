@@ -1,4 +1,4 @@
-Department News Board
+<h1>Department News Board</h1>
 
 Sebuah service yang dapat digunakan untuk membuat dan melihat berita.
 
