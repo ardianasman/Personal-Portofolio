@@ -17,4 +17,4 @@ Fungsi - fungsi yang ada :
 7. /get_all_news - Untuk melakukan pengambilan semua data berita yang ada.
 8. /get_news/<int:x> - Untuk melalukan pengambilan data news sesuai ID.
 
-Untuk news yang diambil dalam jangka waktu tidak lebih dari 30 hari.
+Untuk news yang diambil dalam jangka waktu tidak lebih dari 30 hari..
