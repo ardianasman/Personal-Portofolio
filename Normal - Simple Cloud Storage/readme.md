@@ -2,7 +2,7 @@
 
 How to run :
 
-1. nameko run user
+1. nameko run user_service
 2. nameko run gateway
 3. check in postman
 
