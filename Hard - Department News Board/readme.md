@@ -2,6 +2,11 @@
 
 Sebuah service yang dapat digunakan untuk membuat dan melihat berita.
 
+How to run :
+1. nameko run user
+2. nameko run gateway
+3. check in postman
+
 Fungsi - fungsi yang ada :
 1. /login - Untuk melakukan login agar dapat membuat berita
 2. /register - Untuk dapat memiliki login dan melakukan fitur yang mebutuhkan login
@@ -12,4 +17,4 @@ Fungsi - fungsi yang ada :
 7. /get_all_news - Untuk melakukan pengambilan semua data berita yang ada.
 8. /get_news/<int:x> - Untuk melalukan pengambilan data news sesuai ID.
 
-Untuk news yang diambil dalam jangka waktu tidak lebih dari 30 hari.
+Untuk news yang diambil dalam jangka waktu tidak lebih dari 30 hari..
