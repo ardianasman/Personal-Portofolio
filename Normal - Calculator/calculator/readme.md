@@ -1,6 +1,6 @@
 <h1>Simple Calculator Service</h1>
 
-How tu run :
+How to run :
 1. pip install django
 2. pip install celery
 3. Go to calculator directory, run "python manage.py runserver" on terminal
