@@ -93,3 +93,18 @@ class Gateway:
             
         else:
             return "Please login"
+    
+    @http('GET', '/download_file/<string:x>')
+    def download_file(self, request, x):
+        cookie = request.cookies
+        if cookie:
+            path = Path('Files/'+x)
+            if(path.exists()):
+                if(open(f"{path}", "rb").read()):
+                    return Response(open(f"{path}", "rb").read())
+                else:
+                    return "No file exists with that name"
+
+                
+        else:
+            return "Please login"
