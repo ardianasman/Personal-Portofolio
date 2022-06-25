@@ -1,4 +1,6 @@
 from http import cookies
+import os
+from pathlib import Path
 from unittest import result
 from urllib import response
 from nameko.rpc import RpcProxy
@@ -79,3 +81,38 @@ class Gateway:
         else:
             response = Response("Please login")
             return response
+
+    @http('POST', '/upload_files')
+    def upload_files(self, request):
+        cookie = request.cookies
+        if cookie:
+            path = Path('Files')
+            if(path.exists()):
+                for file in request.files.items():
+                    _, files = file
+                    files.save(f"{path}/{files.filename}")
+                return "Success"
+            else:
+                os.makedirs(path)
+                for file in request.files.items():
+                    _, files = file
+                    files.save(f"{path}/{files.filename}")
+                return "Success"
+            
+        else:
+            return "Please login"
+    
+    @http('GET', '/download_file/<string:x>')
+    def download_file(self, request, x):
+        cookie = request.cookies
+        if cookie:
+            path = Path('Files/'+x)
+            if(path.exists()):
+                if(open(f"{path}", "rb").read()):
+                    return Response(open(f"{path}", "rb").read())
+                else:
+                    return "No file exists with that name"
+
+                
+        else:
+            return "Please login"
