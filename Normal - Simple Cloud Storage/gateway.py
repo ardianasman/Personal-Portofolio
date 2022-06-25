@@ -1,10 +1,10 @@
-import base64
+
+from pathlib import Path
 from urllib import response
 from nameko.rpc import RpcProxy
 from nameko.web.handlers import http
-import requests as requestx
-import requests
 import json
+import os
 
 
 from werkzeug import Response
@@ -78,27 +78,18 @@ class Gateway:
     def upload_files(self, request):
         cookie = request.cookies
         if cookie:
-            # data = format(request.get_data(as_text=False))
-            # tmp = requestx.utils.unquote(data)
-            # el = tmp.split('=')
-            # tmpname = el[2]
-            # elname = tmpname.split('Content-Type: ')
-            # filename = elname[0]
-            # eltype = elname[1].split('\n')
-            # contenttype = eltype[0]
-            # #binary = eltype[1].split('\r\n\r\n\x89PNG\r\n\x1a\n')
-            # yy = "XXX = " + str(eltype)
-            # return yy
-
-            # files = {'file': open('Capture.png','rb')}
-            # values = {'DB': 'photcat', 'OUT': 'csv', 'SHORT': 'short'}
-            # r = requests.post('localhost:8000/upload_files', files=files, data=values)
-            # return r
-
-            url = 'localhost:8000/upload_files'
-            files = {'file': open('gateway.py', 'rb')}
-
-            r = requests.post(url, files=files)
-            return str(r)
+            path = Path('Files')
+            if(path.exists()):
+                for file in request.files.items():
+                    _, files = file
+                    files.save(f"{path}/{files.filename}")
+                return "Success"
+            else:
+                os.makedirs(path)
+                for file in request.files.items():
+                    _, files = file
+                    files.save(f"{path}/{files.filename}")
+                return "Success"
+            
         else:
             return "Please login"
