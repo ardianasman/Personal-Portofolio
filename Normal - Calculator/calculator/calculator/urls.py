@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from services.service import palindrome
+from task.views import palindrome
 
-from services.service import prime
+from task.views import prime
 
 urlpatterns = [
     path('admin/', admin.site.urls),

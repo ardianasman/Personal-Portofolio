@@ -1,8 +1,8 @@
 
-
-
-from .task import palindrome_task, prime_task
+from asyncio import sleep
+from task.task import palindrome_task, prime_task
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def prime(request, x):
